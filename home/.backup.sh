@@ -131,11 +131,12 @@ else
     log "Flatpak not installed; skipping"
 fi
 
-# Backup Homebrew package lists if brew is installed
-if command -v brew >/dev/null 2>&1; then
+# Backup Homebrew package lists
+BREW_BIN="/home/linuxbrew/.linuxbrew/Homebrew/bin/brew"
+if [ -x "$BREW_BIN" ]; then
     log "Backing up Homebrew packages..."
     mkdir -p "$BACKUP_DIR/brew"
-    brew bundle dump --file "$BACKUP_DIR/brew/Brewfile" --force >> "$LOG_FILE" 2>&1 \
+    sudo -u daniel "$BREW_BIN" bundle dump --file "$BACKUP_DIR/brew/Brewfile" --force >> "$LOG_FILE" 2>&1 \
         || log "Warning: brew bundle dump failed"
 else
     log "Homebrew not installed; skipping"
