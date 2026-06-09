@@ -1,0 +1,16 @@
+[Unit]
+Description=ProtonVPN connection for %i
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/protonvpn connect --securecore --country %i
+ExecReload=/bin/protonvpn disconnect && /bin/protonvpn connect --securecore --country %i
+ExecStop=/bin/protonvpn disconnect
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
