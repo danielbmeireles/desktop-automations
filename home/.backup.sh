@@ -136,7 +136,7 @@ BREW_BIN="/home/linuxbrew/.linuxbrew/Homebrew/bin/brew"
 if [ -x "$BREW_BIN" ]; then
     log "Backing up Homebrew packages..."
     mkdir -p "$BACKUP_DIR/brew"
-    sudo -u daniel "$BREW_BIN" bundle dump --file "$BACKUP_DIR/brew/Brewfile" --force >> "$LOG_FILE" 2>&1 \
+    sudo -u daniel env HOME="/home/daniel" "$BREW_BIN" bundle dump --file "$BACKUP_DIR/brew/Brewfile" --force >> "$LOG_FILE" 2>&1 \
         || log "Warning: brew bundle dump failed"
 else
     log "Homebrew not installed; skipping"
