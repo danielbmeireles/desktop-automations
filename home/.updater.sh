@@ -120,7 +120,7 @@ echo
 # Step 3: Brew upgrades
 if command -v brew >/dev/null 2>&1; then
   color_yellow "Step 3: Homebrew upgrades"
-  brew update && brew upgrade && brew cleanup
+  brew update && brew upgrade -y && brew cleanup
   color_green "Homebrew packages upgraded!"
 else
   color_yellow "Homebrew not installed: skipping brew updates"
