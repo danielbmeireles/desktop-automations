@@ -121,6 +121,14 @@ echo
 if command -v brew >/dev/null 2>&1; then
   color_yellow "Step 3: Homebrew upgrades"
   brew update && brew upgrade -y && brew cleanup
+
+  color_yellow "Generating Brewfile at ~/Brewfile"
+  if brew bundle dump --file "$HOME/Brewfile" --force; then
+    color_green "Brewfile generated at $HOME/Brewfile"
+  else
+    color_yellow "Warning: failed to generate $HOME/Brewfile"
+  fi
+
   color_green "Homebrew packages upgraded!"
 else
   color_yellow "Homebrew not installed: skipping brew updates"
